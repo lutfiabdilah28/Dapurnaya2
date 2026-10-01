@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA - Official Online Store</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: #f0fdfa;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Wave Background Top */
+    .bg-wave {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      border-bottom-left-radius: 50% 20px;
+      border-bottom-right-radius: 50% 20px;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      padding: 30px 20px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    /* Header & Brand Logo */
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #0d9488;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .profile-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .profile-img {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ffffff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    p.bio {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 25px;
+      line-height: 1.4;
+      padding: 0 10px;
+    }
+
+    /* Links Container */
+    .links-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Card Item Base */
+    .card-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 18px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .icon-box svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .card-info h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .card-info p {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    /* Action Pill Button */
+    .action-btn {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: background 0.2s;
+    }
+
+    .card-link:hover .action-btn {
+      background: #ffffff;
+    }
+
+    /* Card Specific Colors */
+    .shopee {
+      background: linear-gradient(135deg, #FF5722 0%, #FF7043 100%);
+    }
+    .shopee .action-btn { color: #E64A19; }
+
+    .tokopedia {
+      background: linear-gradient(135deg, #03AC0E 0%, #2ECC71 100%);
+    }
+    .tokopedia .action-btn { color: #03AC0E; }
+
+    .tiktok {
+      background: linear-gradient(135deg, #111111 0%, #2c2c2c 100%);
+    }
+    .tiktok .action-btn { color: #111111; }
+
+    .whatsapp {
+      background: linear-gradient(135deg, #075E54 0%, #25D366 100%);
+    }
+    .whatsapp .action-btn { color: #075E54; }
+
+    .website {
+      background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+    }
+    .website .action-btn { color: #1D4ED8; }
+
+    /* Live Visitors Notification Badge */
+    .visitor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f3f4f6;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-top: 25px;
+      font-size: 0.8rem;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+      }
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer a {
+      color: #9ca3af;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Hiasan Atas -->
+  <div class="bg-wave"></div>
+
+  <div class="container">
+    <!-- Brand Logo Text -->
+    <div class="Dapur Naya">AURA</div>
+
+    <!-- Foto Profil -->
+    <div class="profile-container">
+      <img src="https://drive.google.com/file/d/1ZtmZd2tJUeekPtcGOzHu3Mh1YWpe14a8/view?usp=sharing" alt="Profile" class="profile-img">
+    </div>
+
+    <!-- Judul & Deskripsi Toko -->
+    <h1>AURA - Official Online Store</h1>
+    <p class="bio">Temukan produk terbaik kami di berbagai platform resmi kami.</p>
+
+    <!-- List Links / Tombol -->
+    <div class="links-wrapper">
+
+      <!-- Shopee -->
+      <a href="https://shopee.co.id/shop/289944093" target="_blank" class="card-link shopee">
+        <div class="card-left">
+          <div class="icon-box">
+            <!-- Shopee Icon -->
+            <svg viewBox="0 0 24 24"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg>
+          </div>
+          <div class="card-info">
+            <h2>Official Store</h2>
+            <p>Explore full collection</p>
+          </div>
+        </div>
+        <span class="action-btn">Kunjungi Shopee</span>
+      </a>
+
+      <!-- Tokopedia -->
+      <a href="https://vt.tiktok.com/ZSbUj8L2H/" target="_blank" class="card-link tokopedia">
+        <div class="card-left">
+          <div class="icon-box">
+            <!-- Tokopedia Icon -->
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm-4 11c0-2 4-3.1 6-3.1s6 1.1 6 3.1H8z"/></svg>
+          </div>
+          <div class="card-info">
+            <h2>Belanja Mudah</h2>
+            <p>Trusted shopping experience</p>
+          </div>
+        </div>
+        <span class="action-btn">Buka Tokopedia</span>
+      </a>
+
+      <!-- TikTok Shop -->
+      <a href="https://vt.tiktok.com/ZSbUj8L2H/" target="_blank" class="card-link tiktok">
+        <div class="card-left">
+          <div class="icon-box">
+            <!-- TikTok Icon -->
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .56.04.83.11V9.3a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.33 6.33 0 0 0 9.33 22a6.33 6.33 0 0 0 6.33-6.33V9.05a8.16 8.16 0 0 0 4.93 1.63V7.22a4.86 4.86 0 0 1-1-.53z"/></svg>
+          </div>
+          <div class="card-info">
+            <h2>TikTok Shop</h2>
+            <p>Flash Sale & Live Shopping</p>
+          </div>
+        </div>
+        <span class="action-btn">Ke TikTok Shop</span>
+      </a>
+
+      <!-- WhatsApp Business -->
+      <a href="https://wa.me/6282215506094" target="_blank" class="card-link whatsapp">
+        <div class="card-left">
+          <div class="icon-box">
+            <!-- WhatsApp Icon -->
+            <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 16.5c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.192 8.192 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.24-8.22 8.24z"/></svg>
+          </div>
+          <div class="card-info">
+            <h2>WhatsApp Business</h2>
+            <p>Konsultasi & Tanya Stok</p>
+          </div>
+        </div>
+        <span class="action-btn">Chat via WA</span>
+      </a>
+
+      <!-- Website Resmi -->
+      <a href="https://website-resmi-anda.com" target="_blank" class="card-link website">
+        <div class="card-left">
+          <div class="icon-box">
+            <!-- Web Icon -->
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <div class="card-info">
+            <h2>Website Resmi</h2>
+            <p>Katalog Eksklusif & Promo</p>
+          </div>
+        </div>
+        <span class="action-btn">Web AURA</span>
+      </a>
+
+    </div>
+
+    <!-- Visitor Counter Element -->
+    <div class="visitor-badge">
+      <span class="pulse-dot"></span>
+      <span>15 orang sedang melihat!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <span>&copy; 2026 AURA</span>
+      <a href="#">Tentang Kami</a>
+      <a href="#">Kebijakan Privasi</a>
+    </footer>
+  </div>
+
+</body>
+</html>
